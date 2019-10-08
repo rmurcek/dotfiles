@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/robmurcek/.oh-my-zsh"
+export ZSH="/Users/rob/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -172,10 +172,12 @@ source /usr/local/bin/virtualenvwrapper.sh
 export COMPOSE_HTTP_TIMEOUT=300
 
 # Set up postgres commands for server installed by Postgres App
-export PGDATA='/Users/robmurcek/Library/Application Support/Postgres/var-10'
+export PGDATA='/Users/rob/Library/Application Support/Postgres/var-10'
 export PGHOST=localhost
 
 # opam configuration
-test -r /Users/robmurcek/.opam/opam-init/init.zsh && . /Users/robmurcek/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+test -r /Users/rob/.opam/opam-init/init.zsh && . /Users/rob/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
