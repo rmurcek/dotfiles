@@ -163,19 +163,22 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Python
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-source /usr/local/bin/virtualenvwrapper.sh
+# export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+# export WORKON_HOME=$HOME/.virtualenvs
+# export PROJECT_HOME=$HOME/Devel
+# source /usr/local/bin/virtualenvwrapper.sh
 
 # Docker
 export COMPOSE_HTTP_TIMEOUT=300
 
 # Set up postgres commands for server installed by Postgres App
-export PGDATA='/Users/robmurcek/Library/Application Support/Postgres/var-10'
-export PGHOST=localhost
+# export PGDATA='/Users/robmurcek/Library/Application Support/Postgres/var-10'
+# export PGHOST=localhost
 
 # opam configuration
 test -r /Users/robmurcek/.opam/opam-init/init.zsh && . /Users/robmurcek/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
