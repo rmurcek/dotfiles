@@ -181,4 +181,12 @@ eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # export PATH="/usr/local/sbin:$PATH"
-# export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
+export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
+export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
+
+# Initialize virtualenvwrapper
+source /Users/rob/.local/bin/virtualenvwrapper.sh
+
+# Add ruby to path
+# 2.6.5 installed via brew
+export PATH="/usr/local/opt/ruby/bin:$PATH"
