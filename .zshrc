@@ -69,6 +69,7 @@ plugins=(
   git
   osx
   vscode
+  history-substring-search
 )
 
 
@@ -139,8 +140,10 @@ alias dcs='docker-compose stop'
 alias dcu='docker-compose up --build'
 alias dcuscout='docker-compose up --build scout scout-flask'
 alias dcupilot='docker-compose up --build pilot pilot-flask'
+alias dcudispatch='docker-compose up --build dispatch dispatch-flask'
 alias dcucp='docker-compose up --build copilot-flask'
 alias dcusvs='docker-compose up --build svs svs-flask'
+alias dcudeepthought='docker-compose up --build deepthought'
 alias dcssvs='docker-compose stop svs svs-flask'
 alias dcsscout='docker-compose stop scout scout-flask'
 alias dcspilot='docker-compose stop pilot pilot-flask'
@@ -185,8 +188,14 @@ export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
 export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
 
 # Initialize virtualenvwrapper
-source /Users/rob/.local/bin/virtualenvwrapper.sh
+# source /Users/rob/.local/bin/virtualenvwrapper.sh
 
 # Add ruby to path
 # 2.6.5 installed via brew
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+alias rad='radish -b e2e_tests/validation e2e_tests/features --with-traceback --early-exit --user-data "user=Rob Murcek" --user-data "headless=true" -u "env=local" --tags "test and not wip"'
+alias radpreprod='radish -b e2e_tests/validation e2e_tests/features --with-traceback --early-exit --user-data "user=Rob Murcek" --user-data "headless=true" -u "env=preprod" --tags "test and not wip"'
+alias radhead='radish -b e2e_tests/validation e2e_tests/features --with-traceback --early-exit --user-data "user=Rob Murcek" --user-data "headless=false" -u "env=local" --tags "test and not wip"'
+alias rtest='radish-test --cover-show-missing --cover-min-percentage=100 -b e2e_tests/validation matches e2e_tests/validation/step-matches.yml'
+
