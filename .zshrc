@@ -70,6 +70,7 @@ plugins=(
   osx
   vscode
   history-substring-search
+  pyenv
 )
 
 
@@ -180,6 +181,8 @@ test -r /Users/rob/.opam/opam-init/init.zsh && . /Users/rob/.opam/opam-init/init
 
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
+
+
 eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
@@ -198,4 +201,3 @@ alias rad='radish -b e2e_tests/validation e2e_tests/features --with-traceback --
 alias radpreprod='radish -b e2e_tests/validation e2e_tests/features --with-traceback --early-exit --user-data "user=Rob Murcek" --user-data "headless=true" -u "env=preprod" --tags "test and not wip"'
 alias radhead='radish -b e2e_tests/validation e2e_tests/features --with-traceback --early-exit --user-data "user=Rob Murcek" --user-data "headless=false" -u "env=local" --tags "test and not wip"'
 alias rtest='radish-test --cover-show-missing --cover-min-percentage=100 -b e2e_tests/validation matches e2e_tests/validation/step-matches.yml'
-
