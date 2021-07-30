@@ -187,7 +187,7 @@ eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
+export PATH="/usr/local/opt/postgresql@13/bin:$PATH"
 export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
 
 # Initialize virtualenvwrapper
@@ -201,3 +201,22 @@ alias rad='radish -b e2e_tests/validation e2e_tests/features --with-traceback --
 alias radpreprod='radish -b e2e_tests/validation e2e_tests/features --with-traceback --early-exit --user-data "user=Rob Murcek" --user-data "headless=true" -u "env=preprod" --tags "test and not wip"'
 alias radhead='radish -b e2e_tests/validation e2e_tests/features --with-traceback --early-exit --user-data "user=Rob Murcek" --user-data "headless=false" -u "env=local" --tags "test and not wip"'
 alias rtest='radish-test --cover-show-missing --cover-min-percentage=100 -b e2e_tests/validation matches e2e_tests/validation/step-matches.yml'
+
+
+# 1Password
+alias op-signin='eval $(op signin trialspark)'
+alias aptible-login='aptible login --email=rob@trialspark.com --lifetime=2d --password $(op list items --tags aptible | op get item - --fields password) --otp-token $(op list items --tags aptible | op get totp -)'
+
+function aws-login
+{
+    local -r aws_entry="$(op list items --tags aws)"
+    local -r username="$(echo $aws_entry | op get item - --fields username)"
+    local -r mfa_token="$(echo $aws_entry | op get totp -)"
+​
+    ( cd "$HOME/code/spark"
+      pipenv run python ./scripts/get_aws_session_credentials.py --user "$username" --mfa "$mfa_token" )
+}
+
+
+alias aws-login='( cd "$HOME/code/spark"
+      pipenv run python ./scripts/get_aws_session_credentials.py --user "$username" --mfa "$mfa_token" )'
