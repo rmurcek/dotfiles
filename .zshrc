@@ -219,3 +219,10 @@ function aws-login
 }
 
 export PATH="/usr/local/sbin:$PATH"
+
+
+# Install terraform vault
+is_installed vault || return
+
+export VAULT_ADDR='https://vault.trialspark.com:8200'
+export VAULT_CACERT='~/code/terraform/certs/vault-ca.crt'
