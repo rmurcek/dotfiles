@@ -220,6 +220,10 @@ function aws-login
 
 export PATH="/usr/local/sbin:$PATH"
 
+function is_installed
+{
+        command -v "$1" >/dev/null 2>&1
+}
 
 # Install terraform vault
 is_installed vault || return
