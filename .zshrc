@@ -67,7 +67,7 @@ plugins=(
   docker-compose
   emacs
   git
-  osx
+  macos
   vscode
   history-substring-search
   pyenv
