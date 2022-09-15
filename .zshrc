@@ -218,15 +218,16 @@ function aws-login
     cd -
 }
 
-export PATH="/usr/local/sbin:$PATH"
-
 function is_installed
 {
         command -v "$1" >/dev/null 2>&1
 }
 
-# Install terraform vault
-is_installed vault || return
 
-export VAULT_ADDR='https://vault.trialspark.com:8200'
-export VAULT_CACERT='~/code/terraform/certs/vault-ca.crt'
+export PATH="/usr/local/sbin:$PATH"
+
+# # Install terraform vault
+# is_installed vault || return
+
+# export VAULT_ADDR='https://vault.trialspark.com:8200'
+# export VAULT_CACERT='~/code/terraform/certs/vault-ca.crt'
