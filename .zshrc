@@ -109,7 +109,7 @@ source $ZSH/oh-my-zsh.sh
 # Emacs
 alias e=te
 
-export EDITOR='e'
+export EDITOR='emacs'
 
 # repo
 alias repo="cd ~/code/spark"
