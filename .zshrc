@@ -160,6 +160,7 @@ alias sudo='sudo '
 
 # Java
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home"
+export JAVA_OPTS="-Xms4g -Xmx8g -XX:NewSize=256m -XX:MaxNewSize=356m -XX:PermSize=256m -XX:MaxPermSize=356m -XX:MaxMetaspaceSize=8g"
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
