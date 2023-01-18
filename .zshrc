@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="$HOME/.dotfiles/oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -157,6 +157,9 @@ alias dcr='docker-compose restart'
 
 # Support aliases as sudo (only the first simple command on a line is checked for aliases unless the first ends in a space)
 alias sudo='sudo '
+
+# Java
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home"
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
