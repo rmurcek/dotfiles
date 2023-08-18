@@ -179,11 +179,11 @@ export NVM_DIR="$HOME/.nvm"
 export COMPOSE_HTTP_TIMEOUT=300
 
 # Set up postgres commands for server installed by Postgres App
-# export PGDATA='/Users/rob/Library/Application Support/Postgres/var-10'
+# export PGDATA='$HOME/Library/Application Support/Postgres/var-10'
 # export PGHOST=localhost
 
 # opam configuration
-test -r /Users/rob/.opam/opam-init/init.zsh && . /Users/rob/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+test -r $HOME/.opam/opam-init/init.zsh && . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
@@ -201,7 +201,7 @@ export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I
 export PKG_CONFIG_PATH="/opt/homebrew/opt/ruby/lib/pkgconfig"
 
 # Initialize virtualenvwrapper
-# source /Users/rob/.local/bin/virtualenvwrapper.sh
+# source $HOME/.local/bin/virtualenvwrapper.sh
 
 # Add ruby to path
 # 2.6.5 installed via brew
