@@ -106,6 +106,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Chrome
+alias ch='open -a "Google Chrome"'
 # Emacs
 alias e=te
 
