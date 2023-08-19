@@ -2,10 +2,8 @@
 Keyboard shortcuts -> Modifier Keys
 - For all keyboards:
 -- Caps Lock -> Control
-- For MSFT Keyboard (and not mbp):
--- Option -> Command
--- Command -> Option
 
 # Karabiner-Elements
-- NOOP
-
+- For MSFT Keyboard (and not mbp internal):
+-- left_command -> left_option
+-- left_option -> left_command
