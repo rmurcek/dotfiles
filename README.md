@@ -1,6 +1,8 @@
 # Karabiner-Elements Setup
 - Copy karabiner directory to $HOME/.config/karabiner
 - Verify that it includes:
+- For all devices
+-- caps_lock -> left_control
 - For MSFT Keyboard (and not Apple Internal):
 -- left_command -> left_option
 -- left_option -> left_command
@@ -8,11 +10,6 @@
 - For Apple Internal Keyboard (and not MSFT Keyboard):
 -- right_command -> right_option
 -- right_option -> right_command
-
-# OS Setup
-Keyboard shortcuts -> Modifier Keys
-- Karabiner DriverKit VirtualHIDKeyboard should be selected
--- Caps Lock -> Control
 
 # Terminal Setup
 - Symlink .zshrc and .zprofile to dotfiles versions
@@ -22,3 +19,7 @@ Keyboard shortcuts -> Modifier Keys
 
 # BetterTouchTool Setup
 - Import profile from dotfiles
+
+# OS Setup
+- None required
+- Remove any modifier key modifications
