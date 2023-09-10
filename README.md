@@ -18,6 +18,7 @@ Keyboard shortcuts -> Modifier Keys
 - Symlink .zshrc and .zprofile to dotfiles versions
 - Install Iterm2
 - Import ITerm profile from dotfiles
+- Set profile as default
 
 # BetterTouchTool Setup
 - Import profile from dotfiles
