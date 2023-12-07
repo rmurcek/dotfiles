@@ -23,3 +23,6 @@
 # OS Setup
 - None required
 - Remove any modifier key modifications
+
+# Known issues
+- karabiner.json seems to be overwritten and/or overrode possibly by Karabiner update or OSX update -- be sure to test immediately following updates to either
