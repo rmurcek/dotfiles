@@ -26,3 +26,4 @@
 
 # Known issues
 - karabiner.json seems to be overwritten and/or overrode possibly by Karabiner update or OSX update -- be sure to test immediately following updates to either
+- karabiner sometimes fails to detect an external keyboard, especially when connected through a hub -- try restarting karabiner
