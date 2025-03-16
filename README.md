@@ -1,3 +1,11 @@
+# Machine Setup
+- Install homebrew (https://brew.sh/)
+- Install pyenv (https://github.com/pyenv/pyenv?tab=readme-ov-file#macos)
+  - No need to update env/rc -- ohmyzsh pyenv plugin takes care of it
+- Install oh my zsh (https://github.com/ohmyzsh/ohmyzsh/tree/master)
+  - Note this will replace zshrc (you can find it at .zshrc.pre-oh-my-zsh)
+- Install emacs (https://wikemacs.org/wiki/Installing_Emacs_on_OS_X)
+
 # Karabiner-Elements Setup
 - Copy karabiner directory to $HOME/.config/karabiner
 - Verify that it includes:
@@ -16,12 +24,12 @@
   - ln -s $HOME/code/dotfiles/.zprofile $HOME/.zprofile
   - ln -s $HOME/code/dotfiles/.zshrc $HOME/.zshrc
 
-- Install Iterm2
+# Install Iterm2
 - Import ITerm profile from dotfiles
 - Set profile as default
 
 # BetterTouchTool Setup
-- Import profile from dotfiles
+- Import profile from dotfiles - how?
 
 # OS Setup
 - None required
