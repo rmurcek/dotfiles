@@ -62,6 +62,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  asdf
   brew
   docker
   docker-compose
@@ -138,6 +139,7 @@ alias gco='git checkout'
 alias gcob='git checkout -b'
 alias gbb="git for-each-ref --sort='-authordate:iso8601' --format=' %(authordate:relative)%09%(refname:short)' refs/heads"
 alias gclean='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+
 # Docker bindings
 alias dcs='docker-compose stop'
 alias dcu='docker-compose up --build'
@@ -159,6 +161,12 @@ alias dcr='docker-compose restart'
 
 # Support aliases as sudo (only the first simple command on a line is checked for aliases unless the first ends in a space)
 alias sudo='sudo '
+
+# Stepful (see: https://github.com/stepful/stepful?tab=readme-ov-file )
+alias rs='bundle exec rails' # rails command abstraction
+alias p='pnpm' # package manager abstraction
+# export EDITOR="code --wait" # for commands like `rs credentials:edit` to open vscode
+
 
 # Java
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home"
@@ -194,9 +202,11 @@ eval "$(pyenv init -)"
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/postgresql@13/bin:$PATH"
-export LDFLAGS="-L$(brew --prefix openssl)/lib -L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib -L/opt/homebrew/opt/ruby/lib"
+export LDFLAGS="-L$(brew --prefix openssl)/lib"
+#export LDFLAGS="-L$(brew --prefix openssl)/lib -L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib -L/opt/homebrew/opt/ruby/lib"
 #export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib -L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib -L/opt/homebrew/opt/ruby/lib"
-export CPPFLAGS="-I$(brew --prefix openssl)/include-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I/opt/homebrew/opt/ruby/include"
+export CPPFLAGS="-I$(brew --prefix openssl)/include"
+#export CPPFLAGS="-I$(brew --prefix openssl)/include-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I/opt/homebrew/opt/ruby/include"
 #export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I/opt/homebrew/opt/ruby/include"
 
 
