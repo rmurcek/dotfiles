@@ -18,6 +18,7 @@
   - For Apple Internal Keyboard (and not MSFT Keyboard):
     - right_command -> right_option
     - right_option -> right_command
+- Karabiner-EventViewer should display the updated key codes
 
 # Terminal Setup
 - Symlink .zshrc and .zprofile to dotfiles versions
@@ -38,3 +39,4 @@
 # Known issues
 - karabiner.json seems to be overwritten and/or overrode possibly by Karabiner update or OSX update -- be sure to test immediately following updates to either
 - karabiner sometimes fails to detect an external keyboard, especially when connected through a hub -- try restarting karabiner
+- karabiner driver sometimes fails to start -- disable it and restart machine
