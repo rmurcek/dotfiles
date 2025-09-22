@@ -211,14 +211,14 @@ export CPPFLAGS="-I$(brew --prefix openssl)/include"
 
 
 # For pkg-config to find ruby you may need to set:
-export PKG_CONFIG_PATH="/opt/homebrew/opt/ruby/lib/pkgconfig"
+#export PKG_CONFIG_PATH="/opt/homebrew/opt/ruby/lib/pkgconfig"
 
 # Initialize virtualenvwrapper
 # source $HOME/.local/bin/virtualenvwrapper.sh
 
 # Add ruby to path
 # 2.6.5 installed via brew
-export PATH="/usr/local/opt/ruby/bin:$PATH"
+#export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 alias rad='radish -b e2e_tests/validation e2e_tests/features --with-traceback --early-exit --user-data "user=Rob Murcek" --user-data "headless=true" -u "env=local" --tags "test and not wip"'
 alias radpreprod='radish -b e2e_tests/validation e2e_tests/features --with-traceback --early-exit --user-data "user=Rob Murcek" --user-data "headless=true" -u "env=preprod" --tags "test and not wip"'
