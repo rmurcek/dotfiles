@@ -253,3 +253,6 @@ export PATH="/usr/local/sbin:$PATH"
 
 # export VAULT_ADDR='https://vault.trialspark.com:8200'
 # export VAULT_CACERT='~/code/terraform/certs/vault-ca.crt'
+
+# Add local bin to path for Claude
+export PATH="$HOME/.local/bin:$PATH"
