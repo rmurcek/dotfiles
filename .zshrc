@@ -256,3 +256,9 @@ export PATH="/usr/local/sbin:$PATH"
 
 # Add local bin to path for Claude
 export PATH="$HOME/.local/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/rob/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/rob/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/rob/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/rob/google-cloud-sdk/completion.zsh.inc'; fi
