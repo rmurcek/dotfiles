@@ -165,6 +165,9 @@ alias sudo='sudo '
 # Stepful (see: https://github.com/stepful/stepful?tab=readme-ov-file )
 alias rs='bundle exec rails' # rails command abstraction
 alias p='pnpm' # package manager abstraction
+
+# GitHub (read from gh CLI keychain — used by GitHub MCP)
+export GITHUB_PERSONAL_ACCESS_TOKEN=$(gh auth token 2>/dev/null)
 # export EDITOR="code --wait" # for commands like `rs credentials:edit` to open vscode
 
 
