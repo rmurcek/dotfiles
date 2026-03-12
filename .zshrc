@@ -265,3 +265,14 @@ if [ -f '/Users/rob/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/rob/google-
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/rob/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/rob/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Claude Code dev container
+alias claude-container='docker run -it \
+  --cap-add=NET_ADMIN \
+  --cap-add=NET_RAW \
+  -v $(git rev-parse --show-toplevel):/workspace \
+  -v ~/.claude:/home/node/.claude \
+  -v ~/.claude.json:/home/node/.claude.json \
+  -e ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
+  claude-code-sandbox \
+  zsh'
