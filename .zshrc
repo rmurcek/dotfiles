@@ -257,6 +257,19 @@ export PATH="/usr/local/sbin:$PATH"
 # export VAULT_ADDR='https://vault.trialspark.com:8200'
 # export VAULT_CACERT='~/code/terraform/certs/vault-ca.crt'
 
+# Search Claude Code sessions by keyword (branch name, PR number, etc)
+function claude-sessions {
+  local query="$1"
+  if [ -z "$query" ]; then echo "Usage: claude-sessions <keyword>"; return 1; fi
+  local dir="$HOME/.claude/projects"
+  grep -rl "$query" "$dir" 2>/dev/null | grep '\.jsonl$' | grep -v subagents | while read f; do
+    local first_msg=$(grep -m1 '"role":"user"' "$f" 2>/dev/null | sed 's/.*"content":"\([^"]*\)".*/\1/' | cut -c1-120)
+    local ts=$(grep -m1 '"timestamp"' "$f" 2>/dev/null | sed 's/.*"timestamp":"\([^"]*\)".*/\1/' | cut -c1-10)
+    local mentions=$(grep -c "$query" "$f")
+    printf "%s  %3dx  %s  %s\n" "$ts" "$mentions" "$(basename $f .jsonl)" "$first_msg"
+  done | sort -r
+}
+
 # Add local bin to path for Claude
 export PATH="$HOME/.local/bin:$PATH"
 
