@@ -62,6 +62,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  asdf
   brew
   docker
   docker-compose
@@ -127,6 +128,7 @@ alias gsp='git stash pop'
 alias gsd='git stash drop'
 alias gb='git branch'
 alias gp='git pull --rebase origin $(git rev-parse --abbrev-ref HEAD)'
+alias gpm='git pull --rebase origin main'
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
 alias grh='git reset head --hard'
@@ -138,6 +140,7 @@ alias gco='git checkout'
 alias gcob='git checkout -b'
 alias gbb="git for-each-ref --sort='-authordate:iso8601' --format=' %(authordate:relative)%09%(refname:short)' refs/heads"
 alias gclean='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+
 # Docker bindings
 alias dcs='docker-compose stop'
 alias dcu='docker-compose up --build'
@@ -159,6 +162,15 @@ alias dcr='docker-compose restart'
 
 # Support aliases as sudo (only the first simple command on a line is checked for aliases unless the first ends in a space)
 alias sudo='sudo '
+
+# Stepful (see: https://github.com/stepful/stepful?tab=readme-ov-file )
+alias rs='bundle exec rails' # rails command abstraction
+alias p='pnpm' # package manager abstraction
+
+# GitHub (read from gh CLI keychain — used by GitHub MCP)
+export GITHUB_PERSONAL_ACCESS_TOKEN=$(gh auth token 2>/dev/null)
+# export EDITOR="code --wait" # for commands like `rs credentials:edit` to open vscode
+
 
 # Java
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home"
@@ -194,21 +206,23 @@ eval "$(pyenv init -)"
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/postgresql@13/bin:$PATH"
-export LDFLAGS="-L$(brew --prefix openssl)/lib -L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib -L/opt/homebrew/opt/ruby/lib"
+export LDFLAGS="-L$(brew --prefix openssl)/lib"
+#export LDFLAGS="-L$(brew --prefix openssl)/lib -L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib -L/opt/homebrew/opt/ruby/lib"
 #export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib -L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib -L/opt/homebrew/opt/ruby/lib"
-export CPPFLAGS="-I$(brew --prefix openssl)/include-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I/opt/homebrew/opt/ruby/include"
+export CPPFLAGS="-I$(brew --prefix openssl)/include"
+#export CPPFLAGS="-I$(brew --prefix openssl)/include-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I/opt/homebrew/opt/ruby/include"
 #export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I/opt/homebrew/opt/ruby/include"
 
 
 # For pkg-config to find ruby you may need to set:
-export PKG_CONFIG_PATH="/opt/homebrew/opt/ruby/lib/pkgconfig"
+#export PKG_CONFIG_PATH="/opt/homebrew/opt/ruby/lib/pkgconfig"
 
 # Initialize virtualenvwrapper
 # source $HOME/.local/bin/virtualenvwrapper.sh
 
 # Add ruby to path
 # 2.6.5 installed via brew
-export PATH="/usr/local/opt/ruby/bin:$PATH"
+#export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 alias rad='radish -b e2e_tests/validation e2e_tests/features --with-traceback --early-exit --user-data "user=Rob Murcek" --user-data "headless=true" -u "env=local" --tags "test and not wip"'
 alias radpreprod='radish -b e2e_tests/validation e2e_tests/features --with-traceback --early-exit --user-data "user=Rob Murcek" --user-data "headless=true" -u "env=preprod" --tags "test and not wip"'
@@ -243,3 +257,36 @@ export PATH="/usr/local/sbin:$PATH"
 
 # export VAULT_ADDR='https://vault.trialspark.com:8200'
 # export VAULT_CACERT='~/code/terraform/certs/vault-ca.crt'
+
+# Search Claude Code sessions by keyword (branch name, PR number, etc)
+function claude-sessions {
+  local query="$1"
+  if [ -z "$query" ]; then echo "Usage: claude-sessions <keyword>"; return 1; fi
+  local dir="$HOME/.claude/projects"
+  grep -rl "$query" "$dir" 2>/dev/null | grep '\.jsonl$' | grep -v subagents | while read f; do
+    local first_msg=$(grep -m1 '"role":"user"' "$f" 2>/dev/null | sed 's/.*"content":"\([^"]*\)".*/\1/' | cut -c1-120)
+    local ts=$(grep -m1 '"timestamp"' "$f" 2>/dev/null | sed 's/.*"timestamp":"\([^"]*\)".*/\1/' | cut -c1-10)
+    local mentions=$(grep -c "$query" "$f")
+    printf "%s  %3dx  %s  %s\n" "$ts" "$mentions" "$(basename $f .jsonl)" "$first_msg"
+  done | sort -r
+}
+
+# Add local bin to path for Claude
+export PATH="$HOME/.local/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/rob/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/rob/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/rob/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/rob/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Claude Code dev container
+alias claude-container='docker run -it \
+  --cap-add=NET_ADMIN \
+  --cap-add=NET_RAW \
+  -v $(git rev-parse --show-toplevel):/workspace \
+  -v ~/.claude:/home/node/.claude \
+  -v ~/.claude.json:/home/node/.claude.json \
+  -e ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
+  claude-code-sandbox \
+  zsh'
