@@ -206,16 +206,17 @@ eval "$(pyenv init -)"
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # export PATH="/usr/local/sbin:$PATH"
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
-export LDFLAGS="-L$(brew --prefix openssl)/lib"
-#export LDFLAGS="-L$(brew --prefix openssl)/lib -L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib -L/opt/homebrew/opt/ruby/lib"
-#export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib -L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib -L/opt/homebrew/opt/ruby/lib"
-export CPPFLAGS="-I$(brew --prefix openssl)/include"
-#export CPPFLAGS="-I$(brew --prefix openssl)/include-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I/opt/homebrew/opt/ruby/include"
-#export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I/opt/homebrew/opt/ruby/include"
 
-
-# For pkg-config to find ruby you may need to set:
-#export PKG_CONFIG_PATH="/opt/homebrew/opt/ruby/lib/pkgconfig"
+# Intentionally NOT exporting LDFLAGS / CPPFLAGS globally.
+# They apply to every C/C++ compile in this shell (gem installs, ./configure,
+# pip wheels, npm native addons) and a stale path silently breaks unrelated
+# builds. Modern tools auto-detect Homebrew libs via pkg-config or their own
+# --with-* flags. Per-install overrides:
+#   RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)" asdf install ruby <ver>
+#   gem install pg -- --with-pg-config=$(brew --prefix postgresql@17)/bin/pg_config
+# If a build genuinely can't find a Homebrew lib, prefer extending PKG_CONFIG_PATH
+# (selective) over LDFLAGS/CPPFLAGS (global):
+#   export PKG_CONFIG_PATH="$(brew --prefix openssl@3)/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 # Initialize virtualenvwrapper
 # source $HOME/.local/bin/virtualenvwrapper.sh
