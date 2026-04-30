@@ -205,7 +205,7 @@ eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/postgresql@13/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
 export LDFLAGS="-L$(brew --prefix openssl)/lib"
 #export LDFLAGS="-L$(brew --prefix openssl)/lib -L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib -L/opt/homebrew/opt/ruby/lib"
 #export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib -L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib -L/opt/homebrew/opt/ruby/lib"
@@ -290,3 +290,10 @@ alias claude-container='docker run -it \
   -e ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
   claude-code-sandbox \
   zsh'
+
+# I suspect these aren't necessary with the asdf plugin
+#. "$HOME/.asdf/asdf.sh"
+#. "$HOME/.asdf/completions/asdf.bash"
+
+# Bin used for claude
+export PATH="$HOME/.local/bin:$PATH"
