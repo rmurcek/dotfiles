@@ -25,6 +25,13 @@
   - ln -s $HOME/code/dotfiles/.zprofile $HOME/.zprofile
   - ln -s $HOME/code/dotfiles/.zshrc $HOME/.zshrc
 
+# Claude Code Setup
+- Install Claude Code (https://docs.claude.com/en/docs/claude-code)
+- Symlink user-level settings and skills to dotfiles versions
+  - ln -s $HOME/code/dotfiles/claude/settings.json $HOME/.claude/settings.json
+  - ln -s $HOME/code/dotfiles/claude/skills $HOME/.claude/skills
+- Note: `~/.claude/settings.local.json` is intentionally machine-specific (not synced)
+
 # Install Iterm2
 - Import ITerm profile from dotfiles
 - Set profile as default
